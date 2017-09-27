@@ -6,6 +6,18 @@ export default Ember.Component.extend({
 
   nosort: true,
 
+  didReceiveAttrs() {
+    this._super(...arguments);
+
+    const column = this.get('column');
+    const sortableColumns = this.get('sortableColumns');
+    if (sortableColumns.contains(column)) {
+      this.set('sortable', true);
+    } else {
+      this.set('sortable', false);
+    }
+  },
+
   actions: {
     onNoSort() {
       this.set('ascending', true);

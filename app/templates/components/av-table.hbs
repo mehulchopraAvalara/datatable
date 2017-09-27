@@ -3,7 +3,7 @@
     <tr>
       {{#each columns as |column|}}
         {{av-column column=column
-          sortable=sortable
+          sortableColumns=sortableColumns
           onSelect=(action 'onColumnSelect' column)
         }}
       {{/each}}
