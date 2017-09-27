@@ -1,0 +1,15 @@
+<table class={{_class}}>
+  <thead>
+    <tr>
+      {{#each columns as |column|}}
+        {{av-column column=column
+          sortable=sortable
+          onSelect=(action 'onColumnSelect' column)
+        }}
+      {{/each}}
+    </tr>
+  </thead>
+  <tbody>
+    {{yield this}}
+  </tbody>
+</table>

@@ -1,0 +1,18 @@
+{{column}}
+{{#if sortable}}
+  {{#if ascending}}
+    <span>
+      <a href="#" {{action 'onAscending'}}>Asc</a>
+    </span>
+  {{/if}}
+  {{#if descending}}
+    <span>
+      <a href="#" {{action 'onDescending'}}>Desc</a>
+    </span>
+  {{/if}}
+  {{#if nosort}}
+    <span>
+      <a href="#" {{action 'onNoSort'}}>(No sort)</a>
+    </span>
+  {{/if}}
+{{/if}}

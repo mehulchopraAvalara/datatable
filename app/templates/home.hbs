@@ -1,0 +1,15 @@
+{{#av-table
+  columns=columns
+  fields=fields
+  data=model
+  sortable=true
+  _class='my-table'
+  onDataLoad=(route-action 'onLoadBooks') as |table|}}
+  {{#each table.tableData as |book|}}
+    <tr>
+      <td>{{book.title}}</td>
+      <td>{{book.pages}}</td>
+      <td>{{book.price}}</td>
+    </tr>
+  {{/each}}
+{{/av-table}}
