@@ -15,6 +15,7 @@
     "test": "ember test"
   },
   "devDependencies": {
+    "@avalara/ava-nice-day-foundation": "Avalara/AvaNiceDay-Foundation#0.8.2",
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^2.4.1",
     "ember-cli": "2.11.0",
@@ -27,6 +28,7 @@
     "ember-cli-jshint": "^2.0.1",
     "ember-cli-qunit": "^3.0.1",
     "ember-cli-release": "^0.2.9",
+    "ember-cli-sass": "7.0.0",
     "ember-cli-shims": "^1.0.2",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-test-loader": "^1.1.0",

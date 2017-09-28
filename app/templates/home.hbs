@@ -2,7 +2,9 @@
   columns=columns
   fields=fields
   sortableColumns=sortableColumns
-  data=model
+  data=model.books
+  total=model.total
+  rowsPerPage=3
   _class='my-table'
   onDataLoad=(route-action 'onLoadBooks') as |table|}}
   {{#each table.tableData as |book|}}

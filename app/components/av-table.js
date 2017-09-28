@@ -6,6 +6,7 @@ export default Ember.Component.extend({
 
   didReceiveAttrs() {
     this.set('tableData', this.get('data'));
+    this.set('skip', 0);
   },
 
   actions: {
@@ -20,7 +21,19 @@ export default Ember.Component.extend({
         sortOrder[column] = `${field} ${order}`;
       }
 
-      this.get('onDataLoad')(Object.values(sortOrder).join(','))
+      this.get('onDataLoad')(Object.values(sortOrder).join(','), this.get('skip'),
+        this.get('rowsPerPage'))
+        .then((data) => {
+          _this.set('tableData', data);
+        });
+    },
+
+    onSkipChanged(skip) {
+      this.set('skip', skip);
+      const _this = this;
+
+      this.get('onDataLoad')(Object.values(this.get('sortOrder')).join(','), this.get('skip'),
+        this.get('rowsPerPage'))
         .then((data) => {
           _this.set('tableData', data);
         });

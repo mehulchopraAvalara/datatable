@@ -1,0 +1,20 @@
+{{#if isPaginationRequired}}
+  <div class='pagination-ctrl'>
+    <a class='pagination-arrow {{if isFirstPage "disabled"}}' {{action 'arrowClicked' 'BACK'}}>
+      <span class="icon-left_arrow"></span>
+    </a>
+
+    <ul class='pagination-list'>
+      {{#each pages as |page|}}
+        <li>
+          <a {{action 'pageClicked' page.pageNum}} class='{{if page.isActive "active"}}'>
+            {{if page.display page.display page.pageNum}}
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+    <a class='pagination-arrow {{if isLastPage "disabled"}}' {{action 'arrowClicked' 'FORWARD'}}>
+      <span class="icon-right_arrow"></span>
+    </a>
+  </div>
+{{/if}}

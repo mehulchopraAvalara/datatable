@@ -35,16 +35,29 @@ const books = [
 export default Ember.Route.extend({
 
   model() {
-    return books;
+    return {
+      total: books.length,
+      books: books.slice(0, 3),
+    };
   },
 
   actions: {
-    onLoadBooks(sortOrder) {
+    onLoadBooks(sortOrder, skip, max) {
 
       //Dont look at this logic.
       //A REST service would do all this for you and return the data
-      //For POC purpose this is in memory order by happening
+      //For POC purpose this is in memory order and paging happening
       return new Ember.RSVP.Promise(function(resolve) {
+        if (sortOrder === '') {
+          if (skip >= 0 && max >= 0) {
+            resolve(books.slice(skip, skip + max));
+          } else {
+            resolve(books);
+          }
+
+          return;
+        }
+
         const sortTokens = sortOrder.split(',');
         if (sortTokens.length > 0) {
           let sortedList = Object.assign([], books);
@@ -59,7 +72,12 @@ export default Ember.Route.extend({
                 return e2[field] - e1[field];
               }
             });
-            resolve(sortedList);
+
+            if (skip >= 0 && max >= 0) {
+              resolve(sortedList.slice(skip, skip + max));
+            } else {
+              resolve(sortedList);
+            }
           } else if (sortTokens.length === 2) {
             const comp1 = sortTokens[0].split(' ');
             const field1 = comp1[0];
@@ -74,10 +92,18 @@ export default Ember.Route.extend({
                 (order2 === 'asc' ? (e1[field2] - e2[field2]) : (e2[field2] - e1[field2]));
             });
 
-            resolve(sortedList);
+            if (skip >= 0 && max >= 0) {
+              resolve(sortedList.slice(skip, skip + max));
+            } else {
+              resolve(sortedList);
+            }
           }
         } else {
-          resolve(books);
+          if (skip >= 0 && max >= 0) {
+            resolve(books.slice(skip, skip + max));
+          } else {
+            resolve(books);
+          }
         }
       });
     },

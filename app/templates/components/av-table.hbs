@@ -13,3 +13,7 @@
     {{yield this}}
   </tbody>
 </table>
+{{av-pagination-ctrl numItems=total
+    itemsPerPage=rowsPerPage
+    numSkipped=skip
+    doChangeSkipCount=(action 'onSkipChanged')}}
