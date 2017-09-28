@@ -4,8 +4,12 @@
   sortableColumns=sortableColumns
   data=model.books
   total=model.total
+  orderBy=orderBy
+  defaultOrderBy=defaultOrderBy
   rowsPerPage=3
   _class='my-table'
+  onParamChanged=(action 'onParamChanged')
+  loading=loading
   onDataLoad=(route-action 'onLoadBooks') as |table|}}
   {{#each table.tableData as |book|}}
     <tr>
