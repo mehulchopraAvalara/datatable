@@ -11,7 +11,7 @@ export default Ember.Component.extend({
 
     const column = this.get('column');
     const sortableColumns = this.get('sortableColumns');
-    if (sortableColumns.contains(column)) {
+    if (sortableColumns.includes(column)) {
       this.set('sortable', true);
     } else {
       this.set('sortable', false);

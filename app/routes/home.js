@@ -34,7 +34,17 @@ const books = [
 ];
 export default Ember.Route.extend({
 
-  model() {
+  queryParams: {
+    orderBy: {
+      refreshModel: true,
+    },
+    skip: {
+      refreshModel: true,
+    }
+  },
+
+  model(params) {
+    console.log('model hook', params);
     return {
       total: books.length,
       books: books.slice(0, 3),
@@ -43,6 +53,9 @@ export default Ember.Route.extend({
 
   actions: {
     onLoadBooks(sortOrder, skip, max) {
+
+      // I dont understand this flow. I would expect data loading to be handled
+      // via Ember query param and model hook.
 
       //Dont look at this logic.
       //A REST service would do all this for you and return the data
