@@ -5,38 +5,42 @@ export default Ember.Component.extend({
   sortOrder: {},
 
   didReceiveAttrs() {
-    this.set('tableData', this.get('data'));
-    this.set('skip', 0);
+    this._super(...arguments);
+
+    this.set('_columnsMap', JSON.parse(JSON.stringify(this.get('columnsMap'))));
+    const orderBy = this.get('tableParams.orderBy');
+    if (orderBy) {
+      const tokens = orderBy.split(',');
+      tokens.forEach((token) => {
+        const sortLabelOrder = token.split(':');
+        const sortLabel = sortLabelOrder[0];
+        const order = sortLabelOrder[1];
+
+        const obj = this.get('_columnsMap').findBy('sortLabel', sortLabel);
+        if (obj) {
+          obj.sortOrder = order;
+        }
+      });
+    }
   },
 
   actions: {
-    onColumnSelect(column, order) {
-      const _this = this;
+    onColumnSelect(sortLabel, order) {
       const sortOrder = this.get('sortOrder');
-      const field = this.get('fields')[this.get('columns').indexOf(column)];
 
       if (order === null) {
-        delete sortOrder[column];
+        delete sortOrder[sortLabel];
       } else {
-        sortOrder[column] = `${field} ${order}`;
+        sortOrder[sortLabel] = `${sortLabel}:${order}`;
       }
 
-      this.get('onDataLoad')(Object.values(sortOrder).join(','), this.get('skip'),
-        this.get('rowsPerPage'))
-        .then((data) => {
-          _this.set('tableData', data);
-        });
+      this.get('tableParams.onParamChanged').call(this.get('tableParams.context'), 'orderBy',
+        Object.values(sortOrder).join(','));
     },
 
     onSkipChanged(skip) {
       this.set('skip', skip);
-      const _this = this;
-
-      this.get('onDataLoad')(Object.values(this.get('sortOrder')).join(','), this.get('skip'),
-        this.get('rowsPerPage'))
-        .then((data) => {
-          _this.set('tableData', data);
-        });
+      this.get('tableParams.onParamChanged').call(this.get('tableParams.context'), 'skip', skip);
     },
   },
 });

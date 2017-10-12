@@ -1,19 +1,23 @@
 <table class={{_class}}>
   <thead>
     <tr>
-      {{#each columns as |column|}}
-        {{av-column column=column
-          sortableColumns=sortableColumns
-          onSelect=(action 'onColumnSelect' column)
+      {{#each _columnsMap as |item|}}
+        {{av-column column=item.label
+          sortable=item.sortable
+          sortLabel=item.sortLabel
+          sortOrder=item.sortOrder
+          onSelect=(action 'onColumnSelect')
         }}
       {{/each}}
     </tr>
   </thead>
   <tbody>
-    {{yield this}}
+    {{#each currentPageRecords as |tableRow|}}
+      {{yield tableRow}}
+    {{/each}}
   </tbody>
 </table>
 {{av-pagination-ctrl numItems=total
-    itemsPerPage=rowsPerPage
-    numSkipped=skip
+    itemsPerPage=recordsPerPage
+    numSkipped=tableParams.skip
     doChangeSkipCount=(action 'onSkipChanged')}}

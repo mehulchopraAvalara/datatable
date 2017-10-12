@@ -9,35 +9,31 @@ export default Ember.Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    const column = this.get('column');
-    const sortableColumns = this.get('sortableColumns');
-    if (sortableColumns.contains(column)) {
-      this.set('sortable', true);
+    this.set('ascending', false);
+    this.set('descending', false);
+    this.set('nosort', false);
+
+    const sortOrder = this.get('sortOrder');
+    if (Ember.isEqual(sortOrder, 'asc')) {
+      this.set('ascending', true);
+    } else if (Ember.isEqual(sortOrder, 'desc')) {
+      this.set('descending', true);
     } else {
-      this.set('sortable', false);
+      this.set('nosort', true);
     }
   },
 
   actions: {
     onNoSort() {
-      this.set('ascending', true);
-      this.set('nosort', false);
-
-      this.get('onSelect')('asc');
+      this.get('onSelect')(this.get('sortLabel'), 'asc');
     },
 
     onAscending() {
-      this.set('ascending', false);
-      this.set('descending', true);
-
-      this.get('onSelect')('desc');
+      this.get('onSelect')(this.get('sortLabel'), 'desc');
     },
 
     onDescending() {
-      this.set('descending', false);
-      this.set('nosort', true);
-
-      this.get('onSelect')(null);
+      this.get('onSelect')(this.get('sortLabel'), null);
     },
   },
 });
