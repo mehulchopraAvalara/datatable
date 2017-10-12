@@ -41,12 +41,19 @@ export default Ember.Route.extend(AvTableRoute, {
     //Dont look at this logic.
     //A REST service would do all this for you and return the data
     //For POC purpose this is in memory order and paging happening
-    return new Ember.RSVP.Promise(function(resolve) {
+    return new Ember.RSVP.Promise(function (resolve) {
       if (sortOrder === '') {
         if (skip >= 0 && max >= 0) {
-          resolve(books.slice(skip, skip + max));
+          const list = books.slice(skip, skip + max);
+          resolve({
+            books: list,
+            total: books.length,
+          });
         } else {
-          resolve(books);
+          resolve({
+            books: books,
+            total: books.length,
+          });
         }
 
         return;

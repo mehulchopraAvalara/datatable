@@ -1,10 +1,9 @@
 import Ember from 'ember';
 
-const defaultOrderBy = 'title:asc';
 export default Ember.Mixin.create({
 
   queryParams: ['orderBy', 'skip'],
-  orderBy: defaultOrderBy,
+  orderBy: '',
   skip: 0,
 
   tableParams: Ember.computed('orderBy', 'skip', function () {
