@@ -8,7 +8,7 @@ import AvTableRoute from '../mixins/av-table-route';
 
 export default Ember.Route.extend(AvTableRoute, {
   model() {
-    this._super(...arguments);
+    this._super(...arguments); //very imp! for the av-datatable magic to kick in
     const { orderBy, skip } = this.get('tableParams');
     const max = 3;
 
@@ -28,7 +28,7 @@ import AvTableController from '../mixins/av-table-controller';
 
 export default Ember.Controller.extend(AvTableController, {
 
-  //property with this name needed by the datatable
+  //property with this name and data structure needed by the datatable
   columnsMap: [
     {
       label: 'Title', //the label of the column
