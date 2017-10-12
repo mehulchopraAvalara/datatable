@@ -1,52 +1,67 @@
 # datatable
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+## Route for the model data of the datatable
 
-## Prerequisites
+```javascript
+import Ember from 'ember';
+import AvTableRoute from '../mixins/av-table-route';
 
-You will need the following things properly installed on your computer.
+export default Ember.Route.extend(AvTableRoute, {
+  model() {
+    this._super(...arguments);
+    const { orderBy, skip } = this.get('tableParams');
+    const max = 3;
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with NPM)
-* [Bower](https://bower.io/)
-* [Ember CLI](https://ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
+    //call backend service using orderBy and skip parameters to get the model data
+    //orderBy is in format sortLabel1:asc,sortLabel2:desc
+    //skip,  the skip parameter used for the pagination results
+    return callDataService(orderBy, skip, max)
+  },
+});
+```
 
-## Installation
+## Controller for the corresponding route of the datatable
 
-* `git clone <repository-url>` this repository
-* `cd datatable`
-* `npm install`
-* `bower install`
+```javascript
+import Ember from 'ember';
+import AvTableController from '../mixins/av-table-controller';
 
-## Running / Development
+export default Ember.Controller.extend(AvTableController, {
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+  //property with this name needed by the datatable
+  columnsMap: [
+    {
+      label: 'Title', //the label of the column
+      sortable: false, //this column will not support sorting
+    },
+    {
+      label: 'Pages', //the label of the column
+      sortable: true, //this column supports sorting
+      sortLabel: 'pages', //the sortLabel of this column that is listed in the orderBy tableParams in the model hook
+    },
+    {
+      label: 'Price',
+      sortable: true,
+      sortLabel: 'price',
+    },
+  ],
+});
+```
 
-### Code Generators
+## Template for the corresponding route of the datatable
 
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](http://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+```
+{{#av-table
+  columnsMap=columnsMap
+  currentPageRecords=model.books {{!-- the records that need to be displayed --}}
+  total=model.total {{!-- the count of the total records that exist --}}
+  tableParams=tableParams {{!-- pass as it is for all the magic --}}
+  recordsPerPage=3 {{!-- how many records per page --}}
+  _class='my-table' as |tableRow|}}
+  <tr>
+    <td>{{tableRow.title}}</td>
+    <td>{{tableRow.pages}}</td>
+    <td>{{tableRow.price}}</td>
+  </tr>
+{{/av-table}}
+```
