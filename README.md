@@ -47,6 +47,14 @@ export default Ember.Controller.extend(AvTableController, {
       classList: ['css-class3']
     },
   ],
+  
+  p1ClassList: ['pagination-ctrl'],
+  c1ClassList: ['pagination-arrow'],
+  c11ClassList: ['icon-left_arrow'],
+  c2ClassList: ['pagination-list'],
+  c3ClassList: ['pagination-arrow'],
+  c31ClassList: ['icon-right_arrow'],
+  tableClassList: ['cup-grid'],
 });
 ```
 
@@ -59,13 +67,14 @@ export default Ember.Controller.extend(AvTableController, {
   total=model.total {{!-- the count of the total records that exist --}}
   tableParams=tableParams {{!-- pass as it is for all the magic --}}
   recordsPerPage=3 {{!-- how many records per page --}}
-  paginationDivClassList=paginationDivClassList
-  paginationArrowAnchorClassList=paginationArrowAnchorClassList
-  paginationLeftIconClassList=paginationLeftIconClassList
-  paginationRightIconClassList=paginationRightIconClassList
-  paginationDisabledClass='disabled'
-  paginationActiveClass='active'
-  paginationListClassList=paginationListClassList
+  p1ClassList=p1ClassList
+  c1ClassList=c1ClassList
+  c11ClassList=c11ClassList
+  c2ClassList=c2ClassList
+  c3ClassList=c3ClassList
+  c31ClassList=c31ClassList
+  arrowDisabledClass='disabled'
+  pageNumberActiveClass='active'
   tableClassList=tableClassList as |tableRow|}}
   <tr>
     <td>{{tableRow.title}}</td>
