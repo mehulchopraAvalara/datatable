@@ -59,7 +59,14 @@ export default Ember.Controller.extend(AvTableController, {
   total=model.total {{!-- the count of the total records that exist --}}
   tableParams=tableParams {{!-- pass as it is for all the magic --}}
   recordsPerPage=3 {{!-- how many records per page --}}
-  tableClass='cup-grid' as |tableRow|}}
+  paginationDivClassList=paginationDivClassList
+  paginationArrowAnchorClassList=paginationArrowAnchorClassList
+  paginationLeftIconClassList=paginationLeftIconClassList
+  paginationRightIconClassList=paginationRightIconClassList
+  paginationDisabledClass='disabled'
+  paginationActiveClass='active'
+  paginationListClassList=paginationListClassList
+  tableClassList=tableClassList as |tableRow|}}
   <tr>
     <td>{{tableRow.title}}</td>
     <td>{{tableRow.pages}}</td>
