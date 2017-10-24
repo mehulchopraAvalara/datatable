@@ -33,6 +33,7 @@ export default Ember.Controller.extend(AvTableController, {
     {
       label: 'Title', //the label of the column
       sortable: false, //this column will not support sorting
+      classList: ['css-class1', 'css-class2']
     },
     {
       label: 'Pages', //the label of the column
@@ -43,6 +44,7 @@ export default Ember.Controller.extend(AvTableController, {
       label: 'Price',
       sortable: true,
       sortLabel: 'price',
+      classList: ['css-class3']
     },
   ],
 });
@@ -57,7 +59,7 @@ export default Ember.Controller.extend(AvTableController, {
   total=model.total {{!-- the count of the total records that exist --}}
   tableParams=tableParams {{!-- pass as it is for all the magic --}}
   recordsPerPage=3 {{!-- how many records per page --}}
-  _class='my-table' as |tableRow|}}
+  tableClass='cup-grid' as |tableRow|}}
   <tr>
     <td>{{tableRow.title}}</td>
     <td>{{tableRow.pages}}</td>
