@@ -7,8 +7,11 @@ import Ember from 'ember';
 import AvTableRoute from '../mixins/av-table-route';
 
 export default Ember.Route.extend(AvTableRoute, {
+  //in case of multiple inheritance, make sure that AvTableRoute is the last one in the list of multiple super classes,
+  // to ensure that the appropriate hooks from the other super classes also get called
+  
   model() {
-    this._super(...arguments); //very imp! for the av-datatable magic to kick in
+    this._super(...arguments); //very imp! for the av-table magic to kick in
     const { orderBy, skip } = this.get('tableParams');
     const max = 3;
 
@@ -16,6 +19,15 @@ export default Ember.Route.extend(AvTableRoute, {
     //orderBy is in format sortLabel1:asc,sortLabel2:desc
     //skip,  the skip parameter used for the pagination results
     return callDataService(orderBy, skip, max)
+  },
+  
+  setupController(controller, model, transition) {
+    this._super(...arguments); //very imp! for the av-table magic to kick in
+  },
+  
+  getDefaultSortOrder() {
+    //override this method to set the default sort order when the route loads
+    return 'date desc';
   },
 });
 ```
