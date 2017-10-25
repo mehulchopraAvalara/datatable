@@ -26,7 +26,7 @@ export default Ember.Route.extend(AvTableRoute, {
   },
   
   getDefaultSortOrder() {
-    //override this method to set the default sort order when the route loads
+    //override this method to return the default sort order when the route loads
     return 'date desc';
   },
 });
