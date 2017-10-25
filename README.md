@@ -67,8 +67,8 @@ export default Ember.Controller.extend(AvTableController, {
   c3ClassList: ['pagination-arrow'],
   c31ClassList: ['icon-right_arrow'],
   tableClassList: ['cup-grid'],
-  sortUpArrowClassList: ['small', 'icon-sort_up_arrow'],
-  sortDownArrowClassList: ['big', 'icon-sort_down_arrow'],
+  sortUpArrowClassList: ['icon-sort_up_arrow'],
+  sortDownArrowClassList: ['icon-sort_down_arrow'],
 });
 ```
 
