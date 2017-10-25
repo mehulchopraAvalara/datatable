@@ -81,6 +81,7 @@ export default Ember.Controller.extend(AvTableController, {
   total=model.total {{!-- the count of the total records that exist --}}
   tableParams=tableParams {{!-- pass as it is for all the magic --}}
   recordsPerPage=3 {{!-- how many records per page --}}
+  multiColumnSort=true {{!-- to turn on multilple column sort facility. By default it is false --}}
   {{!-- below attributes are for the different areas generated in the pagination control. The name of the DOM element --}}
   {{!-- matches the below attribute names at the start. Useful for passing on custom styling to the pagination control --}}
   p1ClassList=p1ClassList
