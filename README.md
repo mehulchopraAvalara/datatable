@@ -69,6 +69,7 @@ export default Ember.Controller.extend(AvTableController, {
   tableClassList: ['cup-grid'],
   sortUpArrowClassList: ['icon-sort_up_arrow'],
   sortDownArrowClassList: ['icon-sort_down_arrow'],
+  noSortClassList: ['icon-sort_down_arrow'],
 });
 ```
 
@@ -95,6 +96,7 @@ export default Ember.Controller.extend(AvTableController, {
   pageNumberActiveClass='active'
   sortUpArrowClassList=sortUpArrowClassList
   sortDownArrowClassList=sortDownArrowClassList
+  noSortClassList=noSortClassList
   tableClassList=tableClassList as |tableRow|}}
   <tr>
     <td>{{tableRow.title}}</td>
