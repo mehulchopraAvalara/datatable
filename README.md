@@ -59,17 +59,6 @@ export default Ember.Controller.extend(AvTableController, {
       classList: ['css-class3']
     },
   ],
-  
-  p1ClassList: ['pagination-ctrl'],
-  c1ClassList: ['pagination-arrow'],
-  c11ClassList: ['icon-left_arrow'],
-  c2ClassList: ['pagination-list'],
-  c3ClassList: ['pagination-arrow'],
-  c31ClassList: ['icon-right_arrow'],
-  tableClassList: ['cup-grid'],
-  sortUpArrowClassList: ['icon-sort_up_arrow'],
-  sortDownArrowClassList: ['icon-sort_down_arrow'],
-  noSortClassList: ['icon-sort_down_arrow'],
 });
 ```
 
@@ -84,20 +73,7 @@ export default Ember.Controller.extend(AvTableController, {
   recordsPerPage=3 {{!-- how many records per page --}}
   multiColumnSort=true {{!-- to turn on multilple column sort facility. By default it is false --}}
 
-  {{!-- below attributes are for the different areas generated in the pagination control. The name of the DOM element --}}
-  {{!-- matches the below attribute names at the start. Useful for passing on custom styling to the pagination control --}}
-  p1ClassList=p1ClassList
-  c1ClassList=c1ClassList
-  c11ClassList=c11ClassList
-  c2ClassList=c2ClassList
-  c3ClassList=c3ClassList
-  c31ClassList=c31ClassList
-  arrowDisabledClass='disabled'
-  pageNumberActiveClass='active'
-  sortUpArrowClassList=sortUpArrowClassList
-  sortDownArrowClassList=sortDownArrowClassList
-  noSortClassList=noSortClassList
-  tableClassList=tableClassList as |tableRow|}}
+  as |tableRow|}}
   <tr>
     <td>{{tableRow.title}}</td>
     <td>{{tableRow.pages}}</td>
